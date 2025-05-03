@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme{
+  --color-primary1: #3E77B9;
+  --color-primary2: #75B8EE;
+  --color-secondary1: #FBD115;
+  --color-secondaryTint: #FFE6B6;
+  --color-customGrey: #5D5D5D;
+  --color-outlineGrey: #F7F7F7;
+  --color-ligthGrey: #E1E1E1;
+  --color-textGrey: #5D5D5D;
+  --color-bgBlue: #E7F3FE;
+  --color-alert1 : #D90505;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* @theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+ */
+
+
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
+/* Blog content styling */
+.blog-content h2 {
+  @apply text-2xl font-bold mt-8 mb-4;
+}
+
+.blog-content h3 {
+  @apply text-xl font-bold mt-6 mb-3;
+}
+
+.blog-content p {
+  @apply mb-4 text-gray-700 leading-relaxed;
+}
+
+.blog-content a {
+  @apply text-blue-600 hover:underline;
+}
+
+.blog-content ul,
+.blog-content ol {
+  @apply mb-4 pl-5;
+}
+
+.blog-content li {
+  @apply mb-2;
+}
+
+.blog-content blockquote {
+  @apply border-l-4 border-gray-300 pl-4 italic my-4;
+}
+
+.blog-content pre {
+  @apply bg-gray-100 p-4 rounded-md my-4 overflow-x-auto;
+}
+
+.blog-content code {
+  @apply bg-gray-100 px-1 py-0.5 rounded text-sm;
+}
+
+.blog-content img {
+  @apply rounded-lg my-6;
+}
