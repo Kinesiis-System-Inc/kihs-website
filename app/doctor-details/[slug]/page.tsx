@@ -71,7 +71,7 @@ export default async function Page({ params }: PageProps) {
           <div className="flex-1 flex flex-col justify-center">
             <h2 className="text-2xl font-bold">{doctor.name}</h2>
             <p className="text-xl font-bold mt-5">{doctor.title}</p>
-            <a href="#" className="text-sm text-blue-600 underline mb-2 py-3">
+            <a href="#" className="text-sm text-blue-600 mb-2 py-3">
               OPD Timing
             </a>
 
