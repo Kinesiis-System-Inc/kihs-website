@@ -23,6 +23,7 @@ export const department = defineType({ // Wrap the entire schema definition
             to: [{ type: 'doctor' }], // It references documents of type 'doctor'
           })
         ],
+        initialValue: [],
       }),
     ],
   });

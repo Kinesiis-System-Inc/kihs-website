@@ -66,7 +66,19 @@ export const doctor = defineType({
           title: 'Social Link',
           type: 'object',
           fields: [
-            { name: 'icon', type: 'string', title: 'Icon (facebook/twitter/linkedin)' },
+            { 
+              name: 'icon', 
+              type: 'string', 
+              title: 'Icon', 
+              options: {
+                list: [
+                  { title: 'Facebook', value: 'facebook' },
+                  { title: 'Twitter', value: 'twitter' },
+                  { title: 'LinkedIn', value: 'linkedin' }
+                ],
+                layout: 'radio'
+              }
+            },
             { name: 'url', type: 'url', title: 'Profile URL' },
           ],
         }),

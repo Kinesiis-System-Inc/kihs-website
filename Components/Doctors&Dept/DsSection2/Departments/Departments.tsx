@@ -38,24 +38,26 @@ export const Departments = () => {
   const handleImageClick = (slug: string) => {
     router.push(`/doctor-details/${slug}`);
   };
-
+  debugger
   useEffect(() => {
     const fetchDepartmentsAndDoctors = async () => {
       // 1. Get departments and doctor slugs
       const departmentQuery = `
-        *[_type == "department"]{
-          _id,
-          name,
-          doctors[]->{
-            slug
-          }
+      *[_type == "department"]{
+        _id,
+        name,
+        "doctors": doctors[]->{
+          slug
         }
-      `;
+      }
+    `;
       const departmentsData: Department[] = await client.fetch(departmentQuery);
       setDepartments(departmentsData);
 
       // 2. Get doctor details using all slugs
-      const allSlugs = departmentsData.flatMap((dept) => dept.doctors.map((doc) => doc.slug.current));
+      const allSlugs = departmentsData.flatMap((dept) =>
+        (dept.doctors || []).map((doc) => doc?.slug?.current).filter(Boolean)
+      );
       const uniqueSlugs = [...new Set(allSlugs)];
 
       const doctorDetailsQuery = `
@@ -79,7 +81,7 @@ export const Departments = () => {
       doctors.forEach((doc: any) => {
         detailsBySlug[doc.slug.current] = doc;
       });
-
+      console.log("details by slug",detailsBySlug)
       setDoctorDetails(detailsBySlug);
     };
 
@@ -105,7 +107,7 @@ export const Departments = () => {
                   scrollbarColor: "rgb(209 213 219) transparent",
                 }}
               >
-                {department.doctors.map((doctorRef, index) => {
+                {department.doctors?.map((doctorRef, index) => {
                   const doctor = doctorDetails[doctorRef.slug.current];
                   if (!doctor) return null;
 
