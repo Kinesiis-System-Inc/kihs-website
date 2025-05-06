@@ -234,3 +234,8 @@ export interface Author {
     subHeading: string
     departments: Department[]
   }
+
+  export type InitiativeItem = {
+    title: string;
+    description: string;
+  };

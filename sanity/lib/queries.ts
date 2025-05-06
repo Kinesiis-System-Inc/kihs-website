@@ -226,3 +226,22 @@ export const footerQuery = `
      }
   }
 `
+
+export const socialResponsibilityQuery =`
+  *[_type=="socialResponsibilityPage"][0]{
+      heroImage,
+      heroTitle,
+      heroDescription,
+      initiatives[]{
+        title,
+        description
+      },
+      ctaTitle,
+      ctaDescription,
+      ctaImage,
+      accessImage,
+      accessTitle,
+      accessSubTitle,
+      accessDescription
+    }
+`

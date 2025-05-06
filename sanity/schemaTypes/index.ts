@@ -28,6 +28,7 @@ import { doctorsDepartments } from './DepartmentSchema/DepartmentAndFacilitiesTy
 import { jobPosting } from './JobPostingSchema/JobPostingSchema'
 import { jobPostingNav } from './CareerSchema/JobsNavigation'
 import { careerType } from './CareerSchema/CareerTypes'
+import { socialResponsibilityPage } from './SocialResposibilitySchema/SocialResposibiliyTypes'
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -61,5 +62,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     jobPosting,
     careerType,
     jobPostingNav,
+    socialResponsibilityPage
   ],
 }
