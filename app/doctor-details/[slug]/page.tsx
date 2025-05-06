@@ -10,6 +10,7 @@ interface DoctorData {
   education?: string
   training?: string
   statistics?: string[]
+  timings?: { day: string; timing: string }[]
 }
 
 // 1) Generate slugs for SSG
@@ -38,7 +39,8 @@ export default async function Page({ params }: PageProps) {
       subtitle,
       education,
       training,
-      statistics
+      statistics,
+      timings
     }`,
     { slug }
   )
@@ -53,6 +55,7 @@ export default async function Page({ params }: PageProps) {
 
   // ensure we have an array for statistics
   const statistics = doctor.statistics ?? []
+  const timings = doctor.timings ?? []
 
   return (
     <div>
@@ -71,9 +74,31 @@ export default async function Page({ params }: PageProps) {
           <div className="flex-1 flex flex-col justify-center">
             <h2 className="text-2xl font-bold">{doctor.name}</h2>
             <p className="text-xl font-bold mt-5">{doctor.title}</p>
-            <a href="#" className="text-sm text-blue-600 mb-2 py-3">
-              OPD Timing
-            </a>
+            {timings?.length > 0 && (
+              <div className="my-4">
+                <a href="#" className="text-sm text-blue-600 mb-2 py-3">
+                  OPD Timing
+                </a>
+                <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg overflow-hidden">
+                  <thead>
+                    <tr className="bg-primary1 text-white text-left rounded-t-lg">
+                      <th className="py-3 px-4 first:rounded-tl-lg">Day</th>
+                      <th className="py-3 px-4 last:rounded-tr-lg">Timing</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {timings.map((timing, index) => (
+                      <tr key={index} className="border-b border-gray-200 hover:bg-gray-100">
+                        <td className="py-3 px-4 font-medium">{timing.day}</td>
+                        <td className="py-3 px-4">{timing.timing}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+
 
             {doctor.phone && (
               <div className="flex items-center gap-2 bg-gray-100 text-sm px-3 py-2 rounded-md w-fit mb-2">

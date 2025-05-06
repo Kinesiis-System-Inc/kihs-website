@@ -41,6 +41,43 @@ export const doctor = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'timings',
+      title: 'OPD Timings',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'timingItem',
+          title: 'Timing Item',
+          initialValue: [],
+          fields: [
+            {
+              name: 'day',
+              title: 'Day',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Monday', value: 'Monday' },
+                  { title: 'Tuesday', value: 'Tuesday' },
+                  { title: 'Wednesday', value: 'Wednesday' },
+                  { title: 'Thursday', value: 'Thursday' },
+                  { title: 'Friday', value: 'Friday' },
+                  { title: 'Saturday', value: 'Saturday' },
+                  { title: 'Sunday', value: 'Sunday' },
+                ],
+                layout: 'dropdown', // Optional: default is dropdown anyway
+              },
+            },
+            {
+              name: 'timing',
+              title: 'Timing',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+    }),    
+    defineField({
       name: 'education',
       title: 'Educational Tab Text',
       type: 'text',

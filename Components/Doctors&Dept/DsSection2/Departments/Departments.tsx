@@ -120,7 +120,7 @@ export const Departments = () => {
                         <img
                           src={doctor.imageUrl || "/placeholder.svg"}
                           alt={doctor.name}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover cursor-pointer"
                           onClick={() => handleImageClick(doctorRef.slug.current)}
                         />
                       </div>
