@@ -8,7 +8,7 @@ import { urlFor } from '@/sanity/lib/image'
 import { FooterData } from '@/libs/types'
 
 export const Footer = ({ data }: { data: FooterData }) => {
-    // console.log("Footer data",data)
+  // console.log("Footer data",data)
   const pathname = usePathname()
 
   return (
@@ -52,25 +52,43 @@ export const Footer = ({ data }: { data: FooterData }) => {
         <div>
           <h3 className="text-[16px] font-semibold mb-2">Pages</h3>
           <ul className="space-y-2">
-            {data.pagesLinks.map((item, index) => (
-              <li key={index}>
-                <Link
-                  href={item.url}
-                  className={`hover:underline ${pathname === item.url ? "text-primary1" : "text-black"}`}
-                >
-                  <motion.span className="relative text-[14px] inline-block" initial="rest" whileHover="hover">
-                    {item.label}
-                    <motion.div
-                      className="absolute bottom-0 left-0 h-[1px] bg-primary1 rounded-full"
-                      variants={{
-                        rest: { width: 0, transition: { duration: 0.3 } },
-                        hover: { width: '100%', transition: { duration: 0.3 } }
-                      }}
-                    />
-                  </motion.span>
-                </Link>
-              </li>
-            ))}
+            {data.pagesLinks.map((item, index) => {
+              const isExternal = item.label === 'Service Standards';
+              const isActive = pathname === item.url;
+              const linkClass = `hover:underline ${isActive ? "text-primary1" : "text-black"}`;
+
+              return (
+                <li key={index}>
+                  {isExternal ? (
+                    <a href={item.url} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                      <motion.span className="relative text-[14px] inline-block" initial="rest" whileHover="hover">
+                        {item.label}
+                        <motion.div
+                          className="absolute bottom-0 left-0 h-[1px] bg-primary1 rounded-full"
+                          variants={{
+                            rest: { width: 0, transition: { duration: 0.3 } },
+                            hover: { width: '100%', transition: { duration: 0.3 } },
+                          }}
+                        />
+                      </motion.span>
+                    </a>
+                  ) : (
+                    <Link href={item.url} className={linkClass}>
+                      <motion.span className="relative text-[14px] inline-block" initial="rest" whileHover="hover">
+                        {item.label}
+                        <motion.div
+                          className="absolute bottom-0 left-0 h-[1px] bg-primary1 rounded-full"
+                          variants={{
+                            rest: { width: 0, transition: { duration: 0.3 } },
+                            hover: { width: '100%', transition: { duration: 0.3 } },
+                          }}
+                        />
+                      </motion.span>
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
 
