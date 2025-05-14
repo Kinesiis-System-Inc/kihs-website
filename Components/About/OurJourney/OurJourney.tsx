@@ -40,8 +40,8 @@ export const OurJourney = ({ data }: { data: OurJourneyProps}) => {
       <div className='w-full lg:w-1/2 flex flex-col md:self-start md:pt-14 md:gap-8'>
         <div>
           <p className='text-sm text-blue-500 mb-1'>About Us</p>
-          <h2 className='text-2xl sm:text-3xl font-bold mb-4'>{data.aboutTitle}</h2>
-          <p className='text-customGrey text-[14px] mb-6'>{data.aboutDescription}</p>
+          <h2 className='text-2xl sm:text-3xl font-bold mb-4' dangerouslySetInnerHTML={{__html:data.aboutTitle}}/>
+          <p className='text-customGrey text-[14px] mb-6' dangerouslySetInnerHTML={{__html:data.aboutDescription}}/>
         </div>
         <div>
           <h2 className='text-2xl sm:text-3xl font-bold mb-4'>{data.historyTitle}</h2>
