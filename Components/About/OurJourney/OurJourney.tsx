@@ -37,7 +37,7 @@ export const OurJourney = ({ data }: { data: OurJourneyProps}) => {
         )}
       </div>
 
-      <div className='w-full lg:w-1/2 flex flex-col md:self-start md:pr-20 lg:pr-40 md:pt-14 md:gap-8'>
+      <div className='w-full lg:w-1/2 flex flex-col md:self-start md:pt-14 md:gap-8'>
         <div>
           <p className='text-sm text-blue-500 mb-1'>About Us</p>
           <h2 className='text-2xl sm:text-3xl font-bold mb-4'>{data.aboutTitle}</h2>
