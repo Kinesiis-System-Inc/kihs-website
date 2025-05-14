@@ -1,10 +1,12 @@
 // app/social-responsibility/page.tsx (or wherever you render this page)
 
+import FloatingLogo from '@/Components/FloatingLogo/FloatingLogo'
 import { InitiativeItem } from '@/libs/types'
 import { client } from '@/sanity/lib/client'
 import { urlFor } from '@/sanity/lib/image'
 import { socialResponsibilityQuery } from '@/sanity/lib/queries'
 import { PortableText } from '@portabletext/react'
+
 
 export default async function SocialResponsibilityPage() {
   // Fetch the one document of type `socialResponsibilityPage`
@@ -26,6 +28,9 @@ export default async function SocialResponsibilityPage() {
           />
         </div>
         <div className="w-full md:h-[70vh] lg:w-1/2 flex flex-col justify-center md:self-start md:pr-20 lg:pr-40 md:pt-14 md:gap-8 h-full">
+        
+         <FloatingLogo/>
+          
           <h2 className="text-2xl sm:text-3xl font-semibold mb-6">
             {data.heroTitle}
           </h2>
