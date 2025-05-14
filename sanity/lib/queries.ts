@@ -4,7 +4,17 @@ export const homePageQuery = `
   *[_type == "home"][0]{
     section1,
     section2,
-    section3,
+     section3{         
+      tabs[]{
+        title,
+        items[]{
+          date,
+          isNew,
+          info,
+          "pdfUrl": pdfFile.asset->url
+        }
+      }
+    },
     aboutKihs {
       subtitle,
       title,

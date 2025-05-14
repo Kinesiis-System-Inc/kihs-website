@@ -41,6 +41,14 @@ export const section3Type = defineType({
                     defineField({ name: 'date', title: 'Date', type: 'date' }),
                     defineField({ name: 'isNew', title: 'Is New', type: 'boolean', initialValue: false }),
                     defineField({ name: 'info', title: 'Information', type: 'string' }),
+                    defineField({
+                      name: 'pdfFile',
+                      title: 'Downloadable PDF',
+                      type: 'file',
+                      options: {
+                        accept: '.pdf'
+                      }
+                    }),
                   ],
                 }),
               ],

@@ -9,6 +9,7 @@ interface SanityItem {
   date?: string;
   isNew?: boolean;
   info?: string;
+  pdfUrl?: string
   // Add any other potential fields from Sanity
 }
 
@@ -25,7 +26,7 @@ interface DynamicNavigationProps {
 
 export const DynamicNavigation: React.FC<DynamicNavigationProps> = ({ tabsData }) => {
   console.log(tabsData, "tab data")
-  
+
   // Process and normalize the Sanity data
   const [processedData, setProcessedData] = useState<Record<string, Info[]>>({});
   const [categories, setCategories] = useState<string[]>([]);
@@ -38,6 +39,7 @@ export const DynamicNavigation: React.FC<DynamicNavigationProps> = ({ tabsData }
     date: string;
     isNew: boolean;
     info: string;
+    pdfUrl?: string;
   }
 
   // Process Sanity data when it changes
@@ -46,11 +48,11 @@ export const DynamicNavigation: React.FC<DynamicNavigationProps> = ({ tabsData }
 
     // Create a map to deduplicate tabs by title
     const tabMap = new Map<string, Info[]>();
-    
+
     // Process each tab from Sanity
     tabsData.forEach(tab => {
       if (!tab.title || !tab.items) return;
-      
+
       // Convert Sanity items to Info format
       const processedItems = tab.items.map(item => {
         const typedItem = item as unknown as SanityItem;
@@ -58,32 +60,33 @@ export const DynamicNavigation: React.FC<DynamicNavigationProps> = ({ tabsData }
           date: typedItem.date || "No date",
           isNew: typedItem.isNew || false,
           info: typedItem.info || "No information available",
+          pdfUrl: typedItem.pdfUrl,
         };
       });
-      
+
       // Add to map (will overwrite duplicates with the latest instance)
       tabMap.set(tab.title, processedItems);
     });
-    
+
     // Convert map to record
     const newProcessedData: Record<string, Info[]> = {};
     const newCategories: string[] = [];
-    
+
     tabMap.forEach((items, title) => {
       newProcessedData[title] = items;
       newCategories.push(title);
     });
-    
+
     setProcessedData(newProcessedData);
     setCategories(newCategories);
-    
+
     // Set initial selected tab to first category
     if (newCategories.length > 0 && !navSelected) {
       setNavSelected(newCategories[0]);
     }
   }, [tabsData]);
 
-  const NewsEventComp = ({ date, isNew, info }: Info) => {
+  const NewsEventComp = ({ date, isNew, info, pdfUrl }: Info) => {
     return (
       <div className="w-full py-3 p-2 md:p-3 sm:p-4 grid grid-cols-3 bg-white border-[2px] border-outlineGrey rounded-2xl">
         <div className="flex flex-col col-span-2 gap-2">
@@ -98,7 +101,14 @@ export const DynamicNavigation: React.FC<DynamicNavigationProps> = ({ tabsData }
           </div>
         </div>
         <div className="flex items-center justify-end">
-          <button className="px-3 py-1 text-xs sm:text-sm bg-bgBlue rounded-full cursor-pointer">View</button>
+          {pdfUrl ? (
+
+            <button
+              onClick={() => window.open(pdfUrl, "_blank")}
+              className="px-3 py-1 text-xs sm:text-sm bg-bgBlue rounded-full cursor-pointer">View</button>)
+            : (
+              <span className="text-xs text-gray-400">No PDF</span>
+            )}
         </div>
       </div>
     );
@@ -158,9 +168,8 @@ export const DynamicNavigation: React.FC<DynamicNavigationProps> = ({ tabsData }
                   whileTap={{ scale: 0.9 }}
                 >
                   <span
-                    className={`text-xs sm:text-sm md:text-[14px] whitespace-nowrap ${
-                      navSelected === category ? "text-primary1" : "text-textGrey"
-                    } select-none text-center`}
+                    className={`text-xs sm:text-sm md:text-[14px] whitespace-nowrap ${navSelected === category ? "text-primary1" : "text-textGrey"
+                      } select-none text-center`}
                   >
                     {category}
                   </span>
@@ -210,7 +219,7 @@ export const DynamicNavigation: React.FC<DynamicNavigationProps> = ({ tabsData }
 // // import { ChevronLeft, ChevronRight } from "lucide-react"
 
 // interface DynamicNavigationProps {
-//   tabsData: Tab[] 
+//   tabsData: Tab[]
 // }
 
 

@@ -57,6 +57,7 @@ export interface Author {
     date?: string;
     isNew: boolean;
     info: string;
+    pdfUrl?: string
   }
   
   export interface Tab {
@@ -68,7 +69,7 @@ export interface Author {
   }
   
   export interface HomeSection3 {
-    _type: 'section3';
+    // _type: 'section3';
     tabs: Tab[];
   }
 
