@@ -7,8 +7,8 @@ import { OurJourneyProps } from '@/libs/types'
 
 export const OurJourney = ({ data }: { data: OurJourneyProps}) => {
   return (
-    <section className='flex flex-col md:flex-row justify-around w-full mt-16 p-4 md:px-24 lg:px-32 gap-12 pb-24'>
-      <div className='relative'>
+    <section className='flex flex-col md:flex-row justify-around w-full mt-16 p-4 md:px-24 lg:px-32 gap-16 pb-24'>
+      <div className='relative md:h-[500px]'>
         {data?.nabhImage && (
           <img
             src={urlFor(data.nabhImage).url()}
@@ -19,12 +19,12 @@ export const OurJourney = ({ data }: { data: OurJourneyProps}) => {
         {data?.mainImage && (
           <img
             src={urlFor(data.mainImage).url()}
-            className='w-full h-[500px] rounded-2xl object-cover'
+            className='w-full h-[300px] md:h-[500px] rounded-2xl object-cover'
             alt='KIHS building'
           />
         )}
         {data?.stats && (
-          <div className='absolute bottom-0 w-full min-h-[100px] rounded-lg bg-white shadow-2xl flex justify-around items-center'>
+          <div className='absolute -bottom-[50px] w-full min-h-[100px] rounded-lg bg-white shadow-2xl flex justify-around items-center'>
             {data.stats.map((stat, idx) => (
               <div key={idx} className='flex flex-col'>
                 <h2 className='text-primary1 text-2xl font-semibold' dangerouslySetInnerHTML={{__html:stat.title}}/>
