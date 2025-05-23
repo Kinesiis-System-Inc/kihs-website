@@ -29,7 +29,13 @@ import { jobPosting } from './JobPostingSchema/JobPostingSchema'
 import { jobPostingNav } from './CareerSchema/JobsNavigation'
 import { careerType } from './CareerSchema/CareerTypes'
 import { socialResponsibilityPage } from './SocialResposibilitySchema/SocialResposibiliyTypes'
-
+import { PatientAndVisitorsType } from './PatientAndVisitors/PatientAndVisitorsType'
+import { InpatientServices } from './PatientAndVisitors/InpatientServices'
+import { facilitiesAndVisitor } from './PatientAndVisitors/FacilitiesAndVisitors'
+import { supportServices } from './PatientAndVisitors/SupportServices'
+import { insuranceAndBilling } from './PatientAndVisitors/InsuranceAndBilling'
+import { blogSchema } from './BlogsSchema/blogType'
+import { contentType } from './BlogsSchema/contentType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -62,6 +68,13 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     jobPosting,
     careerType,
     jobPostingNav,
-    socialResponsibilityPage
+    socialResponsibilityPage,
+    PatientAndVisitorsType,
+    InpatientServices,
+    facilitiesAndVisitor,
+    supportServices,
+    insuranceAndBilling,
+    blogSchema,
+    contentType,
   ],
 }

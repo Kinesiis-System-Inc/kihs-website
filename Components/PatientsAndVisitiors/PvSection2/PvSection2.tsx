@@ -1,12 +1,14 @@
 "use client"
 
 import type React from "react"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { InpatientServices } from "./InpatientServices/InpatientServices"
 import { FacilitiesForVisitors } from "./FacilitiesForVisitors/FacilitiesForVisitors"
 import { SupportServices } from "./SupportServices/SupportServices"
 import { InsuranceAndBilling } from "./InsuranceAndBilling/InsuranceAndBilling"
+import { client } from "@/sanity/sanity-utils"
+import { pvQuery } from "@/sanity/lib/queries"
 
 export const PvSection2 = () => {
   const [navSelected, setNavSelected] = useState<NavCategory>("Inpatient Services")
@@ -17,18 +19,42 @@ export const PvSection2 = () => {
 
   const categories: NavCategory[] = ["Inpatient Services", "Facilities for visitors", "Support Services", "Insurance And Billing"]
 
-  // Map each category to its corresponding component
-  const navComponents: Record<NavCategory, React.ReactNode> = {
-    "Inpatient Services": <InpatientServices />,
-    "Facilities for visitors": <FacilitiesForVisitors />,
-    "Support Services": <SupportServices />,
-    "Insurance And Billing": <InsuranceAndBilling />,
+  const[data , setData] = useState()
+  const getData = async()=>{
+    const d = await client.fetch(pvQuery)
+    console.log("d is " , d)
+    setData(d)
+    return d
   }
+
+  useEffect(()=>{
+    console.log("inside the parent useEffect")
+    getData()
+  },[])
+ 
+
+  // Map each category to its corresponding component
+  // const navComponents: Record<NavCategory, React.ReactNode> = {
+  //   "Inpatient Services": <InpatientServices/>,
+  //   "Facilities for visitors": <FacilitiesForVisitors />,
+  //   "Support Services": <SupportServices />,
+  //   "Insurance And Billing": <InsuranceAndBilling />,
+  // }
+
+
+  const navComponents: Record<NavCategory, (data: any) => React.ReactNode> = {
+    "Inpatient Services": (data) => <InpatientServices data={data}/>,
+    "Facilities for visitors": (data) => <FacilitiesForVisitors data={data} />,
+    "Support Services": (data) => <SupportServices data={data} />,
+    "Insurance And Billing": (data) => <InsuranceAndBilling data={data} />,
+  }
+
 
   const handleNavClick = (category: NavCategory) => {
     setPrevNavIndex(categories.indexOf(navSelected))
     setNavSelected(category)
   }
+
 
   return (
     <section className="min-h-[70vh] w-full flex flex-col gap-4 sm:gap-8">
@@ -79,7 +105,8 @@ export const PvSection2 = () => {
               transition={{ duration: 0.5 }}
               className="flex flex-col gap-24 w-full"
             >
-              {navComponents[navSelected]}
+              {/* {navComponents[navSelected]} */}
+              {navComponents[navSelected](data)}
             </motion.div>
           )}
         </div>

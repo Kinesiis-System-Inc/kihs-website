@@ -255,3 +255,33 @@ export const socialResponsibilityQuery =`
       accessDescription
     }
 `
+export const pvQuery = `
+  *[_type == "patientAndVisitors"][0]
+`
+
+export const blogQuery = `
+*[_type == "blogs"] {
+    _id,
+    title,
+    excerpt,
+    slug,
+    _createdAt,
+    _updatedAt,
+    mainImage,
+    content,
+    author->{
+      _id,
+      name,
+      slug,
+      title,
+      image,
+      phone,
+      subtitle,
+      timings,
+      education,
+      training,
+      statistics,
+      socialLinks
+    }
+  }
+`

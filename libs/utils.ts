@@ -25,3 +25,13 @@ export function formatDate(date: string) {
     day: "numeric",
   })
 }
+
+export const convertDateIntoString = (dateStr)=>{
+  const formattedDate = new Date(dateStr).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
+
+  return formattedDate
+}

@@ -3,11 +3,12 @@
 import { useEffect, useRef } from "react"
 import { slugify } from "@/libs/utils"
 
-interface PortableTextProps {
-  content: string[] // This would be Portable Text from Sanity
-}
+// interface PortableTextProps {
+//   content: string[] // This would be Portable Text from Sanity
+// }
 
-export default function PortableText({ content }: PortableTextProps) {
+export default function PortableText({ content }) {
+
   const contentRef = useRef<HTMLDivElement>(null)
 
   // This is a simplified version - in a real implementation you would use @portabletext/react
@@ -28,7 +29,21 @@ export default function PortableText({ content }: PortableTextProps) {
   // This is just a placeholder to demonstrate the concept
   return (
     <div ref={contentRef} className="blog-content prose max-w-none">
-      <h2 id="exploring-generative-ai">Exploring Generative AI in Content Creation</h2>
+
+
+      {content?.headingAndParas?.map((item , index : number)=>{
+        return <div key={index}>
+          <h2> {item.heading} </h2>
+
+          {item?.paras?.map((para , ind:number)=>{
+            return <p key={ind}> {para} </p>
+          })}
+
+        </div>
+      })}
+
+
+      {/* <h2 id="exploring-generative-ai">Exploring Generative AI in Content Creation</h2>
       <p>
         Hello there! As a marketing manager in the SaaS industry, you might be looking for innovative ways to engage
         your audience. I bet generative AI has crossed your mind as an option for creating content. Well, let me share
@@ -115,7 +130,7 @@ export default function PortableText({ content }: PortableTextProps) {
         Simultaneously, SEO aspects also need attention: identifying suitable keywords & phrases people commonly use
         when searching online (SEORCH reference). Yet remember – human appeal doesn&apos;t mean packing text up likely into
         repetitive semblances bearing little value substance and stuffing it full with only &apos;keywords&apos;.
-      </p>
+      </p> */}
     </div>
   )
 }

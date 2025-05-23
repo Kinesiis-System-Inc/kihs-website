@@ -3,30 +3,63 @@ import { notFound } from "next/navigation"
 import TableOfContents from "@/Components/table-of-contents"
 import AuthorProfile from "@/Components/author-profile"
 import PortableText from "@/Components/portable-text"
-import { formatDate } from "@/libs/utils"
+import { convertDateIntoString } from "@/libs/utils"
+import { client, urlFor } from "@/sanity/sanity-utils"
 
 // This would be replaced with a Sanity client fetch in a real implementation
 async function getBlogPost(slug: string) {
-    console.log(slug)
+    console.log("current slug is ", slug)
     // Mock data for demonstration
-    return {
-        _id: "1",
-        title: "Exploring Generative AI in Content Creation",
-        slug: "exploring-generative-ai-in-content-creation",
-        publishedAt: "2023-08-24T00:00:00Z",
-        excerpt:
-            "Discover how to effectively use AI tools like ChatGPT for content creation while maintaining quality and authenticity.",
-        mainImage: "/blogimg.png",
-        author: {
-            _id: "author1",
-            name: "Lorem Ipsum",
-            image: "/passportimg.png",
-            title: "Founder of SAAS Firm - the Best AI and Deep Driven Customer Engagement Tool",
-            bio: "With 10 years in SaaS, I've built MilestoneHitter and helped 100+ companies scale their sales and marketing. I'm excited if you share my vision for success!",
-            linkedin: "https://linkedin.com/in/loremipsum",
-        },
-        content: [], // This would be Portable Text from Sanity
-    }
+
+    const blog = await client.fetch(
+        `*[_type == "blogs" && slug.current == $slug][0]{
+          _id,
+          title,
+          excerpt,
+          slug,
+          mainImage,
+          _createdAt,
+          _updatedAt,
+          content,
+          "author": author->{
+            _id,
+            name,
+            slug,
+            title,
+            image,
+            phone,
+            subtitle,
+            timings,
+            education,
+            training,
+            statistics,
+            socialLinks
+          }
+        }`,
+        {slug}  // 🔁 This is where you pass the dynamic slug
+      )
+
+      console.log("fetched blog is " , blog)
+      return blog
+
+    // return {
+    //     _id: "1",
+    //     title: "Exploring Generative AI in Content Creation",
+    //     slug: "exploring-generative-ai-in-content-creation",
+    //     publishedAt: "2023-08-24T00:00:00Z",
+    //     excerpt:
+    //         "Discover how to effectively use AI tools like ChatGPT for content creation while maintaining quality and authenticity.",
+    //     mainImage: "/blogimg.png",
+    //     author: {
+    //         _id: "author1",
+    //         name: "Lorem Ipsum",
+    //         image: "/passportimg.png",
+    //         title: "Founder of SAAS Firm - the Best AI and Deep Driven Customer Engagement Tool",
+    //         bio: "With 10 years in SaaS, I've built MilestoneHitter and helped 100+ companies scale their sales and marketing. I'm excited if you share my vision for success!",
+    //         linkedin: "https://linkedin.com/in/loremipsum",
+    //     },
+    //     content: [], // This would be Portable Text from Sanity
+    // }
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -50,7 +83,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     <article>
                         <div className="mb-8">
                             <Image
-                                src={post.mainImage || "/placeholder.svg?height=400&width=800"}
+                                src={urlFor(post.mainImage).url() || "/placeholder.svg?height=400&width=800"}
                                 alt={post.title}
                                 width={800}
                                 height={400}
@@ -60,7 +93,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
                         <header className="mb-8">
                             <h1 className="text-3xl md:text-4xl font-bold mb-4">{post.title}</h1>
-                            <p className="text-customGrey">Posted on {formatDate(post.publishedAt)}</p>
+                            <p className="text-customGrey">Posted on {convertDateIntoString(post._createdAt)}</p>
                         </header>
 
                         <PortableText content={post.content} />
