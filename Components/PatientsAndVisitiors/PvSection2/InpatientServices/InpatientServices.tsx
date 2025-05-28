@@ -1,7 +1,17 @@
 import { urlFor } from '@/sanity/sanity-utils'
 import React from 'react'
+import { InpatientServices as InpatientServicesType } from '../../../../libs/types'
 
-export const InpatientServices = ({ data }) => {
+type Props = {
+  data: {
+    inpatientServices: InpatientServicesType
+  }
+}
+
+export const InpatientServices = ({ data }:Props) => {
+    // Property 'inpatientServices' does not exist on type '{ InpatientServices: InpatientServices; }'. Did you mean 'InpatientServices'?ts(2551)
+// InpatientServices.tsx(7, 5): 'InpatientServices' is declared here.
+                                                             
     console.log("inpatient service data is " , data?.inpatientServices)
     // const imgItem = ['/doct_cart.png', '/build_cart.png', '/doct_lady.png']
     return (

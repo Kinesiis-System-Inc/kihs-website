@@ -1,7 +1,14 @@
 import { urlFor } from '@/sanity/sanity-utils'
 import React from 'react'
+import { SupportServices as SupportServicesType } from '../../../../libs/types'
 
-export const SupportServices = ({data}) => {
+type Props = {
+  data: {
+    supportServices: SupportServicesType
+  }
+}
+
+export const SupportServices = ({ data }: Props) => {
   return (
     <div className='flex flex-col md:flex-row px-4 md:px-16  justify-around w-full mt-16 gap-12 pb-24'>
             <div className='relative'>

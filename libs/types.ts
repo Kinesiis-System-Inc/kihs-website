@@ -6,27 +6,7 @@ export interface SanityImage {
   };
 }
 
-export interface Author {
-    _id: string
-    name: string
-    image?: string
-    title: string
-    bio: string
-    linkedin?: string
-  }
-  
-  export interface BlogPost {
-    _id: string
-    title: string
-    slug: string
-    publishedAt: string
-    excerpt: string
-    mainImage?: string
-    author: Author
-    content: any[] // This would be Portable Text from Sanity
-  }
-  
-  export interface HomeSection1{
+export interface HomeSection1{
     mainHeading: string
     mobileImage: object
     desktopImage: object
@@ -240,3 +220,147 @@ export interface Author {
     title: string;
     description: string;
   };
+
+
+ export type ImageWithAlt = {
+  _type: 'image';
+  alt?: string;
+  asset: {
+    _ref: string;
+    _type: 'reference';
+  };
+};
+
+export type FacilitiesAndVisitors = {
+  title: string;
+  subTitle: string;
+  titleAndPara: {
+    title: string;
+    para: string[];
+    _key?: string;
+  }[];
+  coverImage: ImageWithAlt;
+};
+
+export type InpatientServices = {
+  title: string;
+  subTitle: string;
+  services: {
+    serviceTitle: string;
+    servicePoints: string[];
+    _key?: string;
+  }[];
+  imagesCollection: (ImageWithAlt & { _key?: string })[];
+};
+
+export type SupportServices = {
+  title: string;
+  subTitle: string;
+  titleAndPara: {
+    title: string;
+    para: string[];
+    _key?: string;
+  }[];
+  coverImage: ImageWithAlt;
+};
+
+export type InsuranceAndBilling = {
+  title: string;
+  description: string;
+  details: {
+    detailsTItle: string;
+    allDetails: {
+      label: string;
+      value: string;
+      _key?: string;
+    }[];
+  };
+  coverImage: ImageWithAlt;
+  table: {
+    title: string;
+    tableContent: {
+      tableName: string;
+      tableValues: {
+        companyName: string;
+        companyLogo: ImageWithAlt & { _key?: string };
+        _key?: string;
+      }[];
+      _key?: string;
+    }[];
+  };
+  images: (ImageWithAlt & { _key?: string })[];
+};
+
+export type PatientAndVisitors = {
+  _id: string;
+  _type: 'patientAndVisitors';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+
+  inpatientServices: InpatientServices & { _type: 'inpatientServices' };
+  facilitiesAndVisitors: FacilitiesAndVisitors & { _type: 'facilitiesAndVisitors' };
+  supportServices: SupportServices & { _type: 'supportServices' };
+  insuranceAndBilling: InsuranceAndBilling & { _type: 'insuranceAndBilling' };
+};
+
+
+export type BlogPost = {
+  _id: string;
+  _createdAt: string;
+  _updatedAt: string;
+  title: string;
+  excerpt: string;
+  slug: {
+    _type: 'slug';
+    current: string;
+  };
+  mainImage: {
+    _type: 'image';
+    asset: {
+      _ref: string;
+      _type: 'reference';
+    };
+  };
+  author: {
+    _id: string;
+    name: string;
+    title: string;
+    phone?: string;
+    education?: string;
+    training?: string;
+    slug?: { _type: 'slug'; current: string };
+    image: {
+      _type: 'image';
+      asset: {
+        _ref: string;
+        _type: 'reference';
+      };
+    };
+  };
+};
+
+export type Author = {
+   _id: string;
+    name: string;
+    title: string;
+    phone?: string;
+    education?: string;
+    training?: string;
+    slug?: { _type: 'slug'; current: string };
+    image: {
+      _type: 'image';
+      asset: {
+        _ref: string;
+        _type: 'reference';
+      };
+    };
+    socialLinks: SocialLink[]
+};
+
+export type PortableTextContent = {
+  headingAndParas: {
+    heading: string;
+    paras: string[];
+  }[];
+};

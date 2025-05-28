@@ -1,7 +1,13 @@
 import { urlFor } from '@/sanity/sanity-utils'
 import React from 'react'
+import { FacilitiesAndVisitors as FacilitiesAndVisitorsType } from '../../../../libs/types'
 
-export const FacilitiesForVisitors = ({ data }) => {
+type Props = {
+  data: {
+    facilitiesAndVisitors: FacilitiesAndVisitorsType
+  }
+}
+export const FacilitiesForVisitors = ({ data }: Props) => {
     return (
         <div className='flex flex-col md:flex-row-reverse px-4 md:px-16  justify-around w-full mt-16 gap-12 pb-24'>
             {data && <>

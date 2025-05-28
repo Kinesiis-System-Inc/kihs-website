@@ -2,12 +2,17 @@
 
 import { useEffect, useRef } from "react"
 import { slugify } from "@/libs/utils"
+import { PortableTextContent } from "@/libs/types";
 
 // interface PortableTextProps {
 //   content: string[] // This would be Portable Text from Sanity
 // }
 
-export default function PortableText({ content }) {
+interface PortableTextProps {
+  content: PortableTextContent;
+}
+
+export default function PortableText({ content } : PortableTextProps) {
 
   const contentRef = useRef<HTMLDivElement>(null)
 

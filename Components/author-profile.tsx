@@ -3,24 +3,27 @@
 import Image from "next/image"
 // import { Linkedin } from "lucide-react"
 import { BsLinkedin } from "react-icons/bs";
-// import type { Author } from "@/libs/types"
+import type { Author } from "@/libs/types"
 import { urlFor } from "@/sanity/sanity-utils";
 import {redirect} from "next/navigation"
 
 // interface AuthorProfileProps {
 //   author: Author
 // }
+interface AuthorProfileProps {
+  author: Author;
+}
 
-export default function AuthorProfile({ author }) {
+export default function AuthorProfile({ author }: AuthorProfileProps) {
 
   console.log("author is " , author)
 
-  const redirectDoctorDetails = (e)=>{
+  const redirectDoctorDetails = (e: React.MouseEvent)=>{
     e.stopPropagation()
     redirect(`/doctor-details/${author?.slug?.current}`)
   }
 
-  const returnLinkedinURL = (author)=>{
+  const returnLinkedinURL = (author: Author)=>{
     const url = author.socialLinks.filter((link)=>{
       if(link.icon == "linkedin") return link.url
     })

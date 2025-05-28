@@ -26,7 +26,7 @@ export function formatDate(date: string) {
   })
 }
 
-export const convertDateIntoString = (dateStr)=>{
+export const convertDateIntoString = (dateStr: string): string=>{
   const formattedDate = new Date(dateStr).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",

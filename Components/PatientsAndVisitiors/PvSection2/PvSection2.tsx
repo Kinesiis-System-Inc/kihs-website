@@ -9,6 +9,7 @@ import { SupportServices } from "./SupportServices/SupportServices"
 import { InsuranceAndBilling } from "./InsuranceAndBilling/InsuranceAndBilling"
 import { client } from "@/sanity/sanity-utils"
 import { pvQuery } from "@/sanity/lib/queries"
+import { PatientAndVisitors } from "@/libs/types"
 
 export const PvSection2 = () => {
   const [navSelected, setNavSelected] = useState<NavCategory>("Inpatient Services")
@@ -19,7 +20,7 @@ export const PvSection2 = () => {
 
   const categories: NavCategory[] = ["Inpatient Services", "Facilities for visitors", "Support Services", "Insurance And Billing"]
 
-  const[data , setData] = useState()
+  const [data, setData] = useState<PatientAndVisitors | null>(null);
   const getData = async()=>{
     const d = await client.fetch(pvQuery)
     console.log("d is " , d)
@@ -42,7 +43,7 @@ export const PvSection2 = () => {
   // }
 
 
-  const navComponents: Record<NavCategory, (data: any) => React.ReactNode> = {
+  const navComponents: Record<NavCategory, (data: PatientAndVisitors) => React.ReactNode> = {
     "Inpatient Services": (data) => <InpatientServices data={data}/>,
     "Facilities for visitors": (data) => <FacilitiesForVisitors data={data} />,
     "Support Services": (data) => <SupportServices data={data} />,
@@ -93,7 +94,7 @@ export const PvSection2 = () => {
       </div>
       <AnimatePresence initial={false}>
         <div className="w-full flex items-center">
-          {navSelected && (
+          {data && navSelected &&  (
             <motion.div
               key={navSelected}
               initial={{
@@ -106,6 +107,8 @@ export const PvSection2 = () => {
               className="flex flex-col gap-24 w-full"
             >
               {/* {navComponents[navSelected]} */}
+              {/* Argument of type 'undefined' is not assignable to parameter of type 'PatientAndVisitors'.ts(2345)
+const data: undefined */}
               {navComponents[navSelected](data)}
             </motion.div>
           )}
