@@ -19,7 +19,7 @@ export async function POST(req: Request) {
 
     const mailOptions = {
       from: process.env.SMTP_USER,
-      to: 'karan.bhosale@kinesiis.in', // your receiving email
+      to: process.env.RECIPIENT_EMAIL || 'care@kullollihealth.com',
       subject: `New Contact Form Submission from ${firstName} ${lastName}`,
       html: `
         <h2>Contact Details</h2>

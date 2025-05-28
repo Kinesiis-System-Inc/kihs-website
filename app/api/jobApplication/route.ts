@@ -54,7 +54,7 @@ export async function POST(req: Request) {
     // Setup the email options
     const mailOptions: any = {
       from: process.env.SMTP_USER,
-      to: process.env.RECIPIENT_EMAIL || 'karan.bhosale@kinesiis.in',
+      to: process.env.RECIPIENT_EMAIL || 'care@kullollihealth.com',
       subject: `Job Application: ${jobTitle} - ${firstName} ${lastName}`,
       html: emailHtml,
     };
