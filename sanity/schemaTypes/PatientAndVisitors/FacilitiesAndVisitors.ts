@@ -42,10 +42,13 @@ export const facilitiesAndVisitor = defineType({
 			]
 		}),
 		defineField({
-			name : "coverImage",
-			title : "Cover Image",
-			type : "image",
-			fields : [{type : "string" , name : "alt" , title : "Alt"}]
-		})
+             name: "video",
+             title: "Video (WebM only)",
+             type: "file",
+             options: {
+                accept: "video/webm",
+             },
+            description: "Upload a .webm video file here.",
+    }),
 	]
 })

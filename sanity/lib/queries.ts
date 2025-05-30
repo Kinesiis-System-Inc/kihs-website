@@ -256,7 +256,24 @@ export const socialResponsibilityQuery =`
     }
 `
 export const pvQuery = `
-  *[_type == "patientAndVisitors"][0]
+  *[_type == "patientAndVisitors"][0]{
+    // Inpatient Services (whatever fields you need)
+    inpatientServices,
+
+    // Facilities & Visitors—with aliased videoUrl
+    "facilitiesAndVisitors": facilitiesAndVisitors{
+      title,
+      subTitle,
+      titleAndPara[]{ title, para },
+      "videoUrl": video.asset->url
+    },
+
+    // Support Services
+    supportServices,
+
+    // Insurance & Billing
+    insuranceAndBilling
+  }
 `
 
 export const blogQuery = `
@@ -282,6 +299,13 @@ export const blogQuery = `
       training,
       statistics,
       socialLinks
+    }
+  }
+`
+export const medicalServiceQuery = `
+  *[_type == "medicalService"][0]{
+    "advancedDiagnostics": advancedDiagnostics{
+      "videoUrl": video.asset->url
     }
   }
 `

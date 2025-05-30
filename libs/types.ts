@@ -231,6 +231,14 @@ export interface HomeSection1{
   };
 };
 
+export type FileWithAsset = {
+  _type: 'file';
+  asset: {
+    _ref: string;
+    _type: 'reference';
+  };
+};
+
 export type FacilitiesAndVisitors = {
   title: string;
   subTitle: string;
@@ -240,6 +248,7 @@ export type FacilitiesAndVisitors = {
     _key?: string;
   }[];
   coverImage: ImageWithAlt;
+  videoUrl?: string
 };
 
 export type InpatientServices = {
@@ -364,3 +373,10 @@ export type PortableTextContent = {
     paras: string[];
   }[];
 };
+
+
+export type MedicalServiceQueryResult = {
+  advancedDiagnostics: {
+    videoUrl?: string
+  }
+}

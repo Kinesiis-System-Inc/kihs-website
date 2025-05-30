@@ -36,6 +36,8 @@ import { supportServices } from './PatientAndVisitors/SupportServices'
 import { insuranceAndBilling } from './PatientAndVisitors/InsuranceAndBilling'
 import { blogSchema } from './BlogsSchema/blogType'
 import { contentType } from './BlogsSchema/contentType'
+import { MedicalServiceType } from './MedicalServiceSchema/MedicalServiceType'
+import { advancedDiagnostics } from './MedicalServiceSchema/AdvancedDiagnostics'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -76,5 +78,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     insuranceAndBilling,
     blogSchema,
     contentType,
+    MedicalServiceType,
+    advancedDiagnostics,
   ],
 }

@@ -1,7 +1,20 @@
-import React from 'react'
+'use client'
+import { MedicalServiceQueryResult } from '@/libs/types';
+import { medicalServiceQuery } from '@/sanity/lib/queries';
+import React, { useEffect, useState } from 'react'
+import { client } from '@/sanity/lib/client'
 
-export const AdvancedDiagnostics = () => {
-  const imgItem = ['/doct_cart.png', '/build_cart.png', '/doct_lady.png'];
+
+export const AdvancedDiagnostics =  () => {
+  const [data, setData] = useState<MedicalServiceQueryResult | null>(null)
+
+  useEffect(() => {
+    client
+      .fetch<MedicalServiceQueryResult>(medicalServiceQuery)
+      .then((res) => setData(res))
+  }, [])
+
+  if (!data) return <p>Loading…</p>
   return (
     <div className="w-full mb-8 p-4 md:pl-16">
       <h2 className="text-2xl font-semibold">Advanced Diagnostics</h2>
@@ -25,12 +38,12 @@ export const AdvancedDiagnostics = () => {
             <li>Echocardiography</li>
           </ul>
         </div>
-     
-     
-     
-     
-     
-     
+
+
+
+
+
+
 
         {/* Right Column */}
         <div>
@@ -47,8 +60,18 @@ export const AdvancedDiagnostics = () => {
       </div>
 
       {/* Image Grid */}
-      <div className='grid grid-cols-1 grid-rows-3 md:grid-rows-1 md:grid-cols-3 items-center justify-center md:justify-between gap-4 w-full mt-6'>
-        {imgItem.map((item, index) => <div key={index} className='w-full flex items-center justify-center'><img src={item} className='rounded-3xl self-center' /></div>)}
+      <div className='flex items-center justify-center md:justify-between w-full mt-6 md:px-64'>
+        {data.advancedDiagnostics.videoUrl && (
+          <video
+            loop
+            muted
+            autoPlay
+            className="w-full rounded-md shadow"
+          >
+            <source src={data.advancedDiagnostics.videoUrl} type="video/webm" />
+            Your browser doesn’t support WebM.
+          </video>
+        )}
       </div>
     </div>
   )
