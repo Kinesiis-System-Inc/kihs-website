@@ -14,7 +14,7 @@ export const SurgicalSpecialties = () => {
       .then((res) => setData(res))
   }, [])
 
-  // if(!data) return <p>...loading</p>
+  if(!data) return <p>...loading</p>
 
   return (
     <div className='flex flex-col md:flex-row px-4 md:px-16  justify-around w-full mt-16 gap-12 pb-24'>

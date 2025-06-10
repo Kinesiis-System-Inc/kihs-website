@@ -1,6 +1,5 @@
 import { defineType, defineField } from "sanity"
 
-
 export const criticalCare = defineType({
 	name : "criticalCare",
 	title : "Critical Care ICU",
