@@ -1,18 +1,18 @@
-import { urlFor } from '@/sanity/sanity-utils'
+// import { urlFor } from '@/sanity/sanity-utils'
 import React from 'react'
 import { InpatientServices as InpatientServicesType } from '../../../../libs/types'
 
 type Props = {
-  data: {
-    inpatientServices: InpatientServicesType
-  }
+    data: {
+        inpatientServices: InpatientServicesType
+    }
 }
 
-export const InpatientServices = ({ data }:Props) => {
+export const InpatientServices = ({ data }: Props) => {
     // Property 'inpatientServices' does not exist on type '{ InpatientServices: InpatientServices; }'. Did you mean 'InpatientServices'?ts(2551)
-// InpatientServices.tsx(7, 5): 'InpatientServices' is declared here.
-                                                             
-    console.log("inpatient service data is " , data?.inpatientServices)
+    // InpatientServices.tsx(7, 5): 'InpatientServices' is declared here.
+
+    console.log("inpatient service data is ", data?.inpatientServices)
     // const imgItem = ['/doct_cart.png', '/build_cart.png', '/doct_lady.png']
     return (
         // <div className="w-full mb-8 p-4 md:pl-16">
@@ -52,7 +52,7 @@ export const InpatientServices = ({ data }:Props) => {
         // </div>
         <div className="w-full mb-8 p-4 md:pl-16">
             {data != undefined && <>
-            {console.log("inside the inpatientService data")}
+                {console.log("inside the inpatientService data")}
                 <h2 className="text-2xl font-semibold"> {data.inpatientServices?.title} </h2>
                 <p className="mb-4 text-customGrey text-xs sm:text-sm md:text-[14px]">{data.inpatientServices?.subTitle}</p>
                 <p className="mb-2 text-customGrey text-xs sm:text-sm md:text-[14px]">At our hospital, we prioritise your comfort and recovery with comprehensive inpatient care services:</p>
@@ -99,8 +99,17 @@ export const InpatientServices = ({ data }:Props) => {
                 })}
 
 
-                <div className='grid grid-cols-1 grid-rows-3 md:grid-rows-1 md:grid-cols-3 items-center justify-center md:justify-between gap-4 w-full'>
-                    {data.inpatientServices?.imagesCollection.map((item, index: number) => <div key={index} className='w-full flex items-center justify-center'><img src={urlFor(item).url()} className='rounded-3xl self-center' /></div>)}
+                <div className='flex items-center justify-center md:justify-between w-full mt-6 md:px-64'>
+                    
+                        <video
+                            loop
+                            muted
+                            autoPlay
+                            className="w-full rounded-md shadow"
+                        >
+                            <source src="./Conference Hall.webm" type="video/webm" />
+                            Your browser doesn’t support WebM.
+                        </video>
                 </div>
             </>}
         </div>

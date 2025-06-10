@@ -1,21 +1,48 @@
-import React from 'react'
+import { MedicalServiceQueryResult } from '@/libs/types'
+import { medicalServiceQuery } from '@/sanity/lib/queries'
+import { client } from '@/sanity/sanity-utils'
+import React, { useEffect, useState } from 'react'
 
 export const SurgicalSpecialties = () => {
+
+  const [data, setData] = useState<MedicalServiceQueryResult | null>(null)
+
+
+  useEffect(() => {
+    client
+      .fetch<MedicalServiceQueryResult>(medicalServiceQuery)
+      .then((res) => setData(res))
+  }, [])
+
+  // if(!data) return <p>...loading</p>
+
   return (
     <div className='flex flex-col md:flex-row px-4 md:px-16  justify-around w-full mt-16 gap-12 pb-24'>
-      <div className='relative flex items-center justify-center'>
-        <img src='/support_doc.png' className='rounded-2xl' alt='KIHS building' />
+
+      <div className="flex items-center justify-center w-full md:w-[40vw]">
+        <video
+          loop
+          muted
+          autoPlay
+          className="w-full h-auto rounded-md shadow"
+        >
+          <source src={data?.surgicalSpecialties.videoUrl} type="video/webm" />
+          Your browser doesn’t support WebM.
+        </video>
       </div>
       <div className="w-full lg:w-1/2 flex flex-col md:self-start md:pr-20 lg:pr-40 md:pt-14 md:gap-8">
         <div>
-          <h2 className="text-2xl sm:text-3xl font-bold">2.Surgical Specialties</h2>
-          <p className="text-customGrey text-[14px]">Comprehensive Surgical Services</p>
-          <p className="text-customGrey text-[14px] font-semibold mb-6">Surgical Highlights</p>
+          <h2 className="text-2xl sm:text-3xl font-bold">2.{data?.surgicalSpecialties.sectionTitle}</h2>
+          <p className="text-customGrey text-[14px]">{data?.surgicalSpecialties.des}</p>
+          <p className="text-customGrey text-[14px] font-semibold mb-6">{data?.surgicalSpecialties.surgicalHighlights.title}</p>
           <div />
-          <p className="text-customGrey text-[14px]">- Leader in Endo Urology surgeries</p>
-          <p className="text-customGrey text-[14px] mb-6">- Highest number of laparoscopic surgeries in Western Maharashtra</p>
-          <p className="text-customGrey text-[14px] mb-6">Our hospital offers expert surgical care across multiple specialties:</p>
-          <p className="text-customGrey text-[14px] font-semibold">Surgical Departments</p>
+
+          {data?.surgicalSpecialties.surgicalHighlights.highlights?.map((item , ind)=>{
+            return <p key={ind} className="text-customGrey text-[14px]">- {item}</p>
+          })}
+          
+          <p className="text-customGrey text-[14px] mb-6">{data?.surgicalSpecialties.hospitalOffers.title}:</p>
+          {/* <p className="text-customGrey text-[14px] font-semibold">Surgical Departments</p>
           <ul className="list-disc pl-10 space-y-1 text-customGrey text-xs sm:text-sm md:text-[14px] mb-6">
             <li>
               General Surgery
@@ -92,7 +119,17 @@ export const SurgicalSpecialties = () => {
             <li>
               Laparoscopic Gynaecological Surgeries
             </li>
-          </ul>
+          </ul> */}
+
+          {data?.surgicalSpecialties.hospitalOffers.sections?.map((s , index)=>{
+            return <div key={index}>
+               <p className="text-customGrey text-[14px] font-semibold">{s.sectionTitle}</p>
+               <ul className="list-disc pl-10 space-y-1 text-customGrey text-xs sm:text-sm md:text-[14px] mb-6">
+                {s.sectionPoints?.map((p , ind)=> <li key={ind}>{p}</li>)}
+               </ul>
+            </div>
+          })}
+
         </div>
       </div>
     </div>

@@ -302,10 +302,57 @@ export const blogQuery = `
     }
   }
 `
+// export const medicalServiceQuery = `
+//   *[_type == "medicalService"][0]{
+//     "advancedDiagnostics": advancedDiagnostics{
+//       "videoUrl": video.asset->url
+//     }
+//   }
+// `
+
+
 export const medicalServiceQuery = `
   *[_type == "medicalService"][0]{
-    "advancedDiagnostics": advancedDiagnostics{
-      "videoUrl": video.asset->url
+    advancedDiagnostics {
+      sectionTitle,
+      "videoUrl": video.asset->url,
+      diagnosticTypes[] {
+        title,
+        procedures
+      }
+    },
+    criticalCare {
+      sectionTitle,
+      "videoUrl": video.asset->url,
+      des,
+      boldTitle,
+      icus {
+        name,
+        features
+      },
+      equipment,
+      specialFeatures
+    },
+    surgicalSpecialties {
+      sectionTitle,
+      des,
+      "videoUrl": video.asset->url,
+      surgicalHighlights {
+        title,
+        highlights
+      },
+      hospitalOffers {
+        title,
+        sections[] {
+          sectionTitle,
+          sectionPoints
+        }
+      }
+    },
+    medicalSpeciality {
+      sectionTitle,
+      "sectionImageUrl": sectionImage.asset->url,
+      specialities
     }
   }
-`
+`;

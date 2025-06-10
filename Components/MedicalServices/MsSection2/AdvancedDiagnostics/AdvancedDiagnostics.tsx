@@ -17,11 +17,11 @@ export const AdvancedDiagnostics =  () => {
   if (!data) return <p>Loading…</p>
   return (
     <div className="w-full mb-8 p-4 md:pl-16">
-      <h2 className="text-2xl font-semibold">Advanced Diagnostics</h2>
+      <h2 className="text-2xl font-semibold">{data.advancedDiagnostics.sectionTitle}</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
         {/* Left Column */}
-        <div>
+        {/* <div>
           <p className="text-sm text-customGrey">Comprehensive Diagnostic Services</p>
           <p className="text-sm text-customGrey">Our diagnostic capabilities include:</p>
           <p className="text-sm text-customGrey">Clinical Pathology Services</p>
@@ -37,7 +37,21 @@ export const AdvancedDiagnostics =  () => {
             <li>Sonography Guided Procedures</li>
             <li>Echocardiography</li>
           </ul>
-        </div>
+        </div> */}
+
+
+        {data.advancedDiagnostics.diagnosticTypes.map((item , index)=>{
+          return <div key={index}>
+            <p  className="text-sm text-customGrey">{item.title}</p>
+            {item.procedures.length > 0 && <>
+            <ul className="list-disc pl-6 text-customGrey text-sm space-y-1 mb-4">
+              {item.procedures.map((p , ind)=>{
+                return <li key={ind}> {p} </li>
+              })}
+            </ul>
+            </>}
+          </div>
+        })}
 
 
 
@@ -46,7 +60,7 @@ export const AdvancedDiagnostics =  () => {
 
 
         {/* Right Column */}
-        <div>
+        {/* <div>
           <p className="text-sm text-customGrey">Specialised Diagnostic Procedures</p>
           <ul className="list-disc pl-6 text-customGrey text-sm space-y-1">
             <li>Electrocardiogram (ECG)</li>
@@ -56,7 +70,8 @@ export const AdvancedDiagnostics =  () => {
             <li>Cystoscopy</li>
             <li>Optometry</li>
           </ul>
-        </div>
+        </div> */}
+      
       </div>
 
       {/* Image Grid */}

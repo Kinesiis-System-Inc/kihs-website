@@ -375,8 +375,62 @@ export type PortableTextContent = {
 };
 
 
-export type MedicalServiceQueryResult = {
-  advancedDiagnostics: {
-    videoUrl?: string
-  }
+// export type MedicalServiceQueryResult = {
+//   advancedDiagnostics: {
+//     videoUrl?: string
+//   }
+// }
+
+export interface MedicalServiceQueryResult {
+  advancedDiagnostics: AdvancedDiagnostics;
+  criticalCare: CriticalCare;
+  surgicalSpecialties: SurgicalSpecialties;
+  medicalSpeciality: MedicalSpeciality;
+}
+
+
+export interface AdvancedDiagnostics {
+  sectionTitle: string;
+  videoUrl: string;
+  diagnosticTypes: {
+    title: string;
+    procedures: string[];
+  }[];
+}
+
+
+export interface CriticalCare {
+  sectionTitle: string;
+  videoUrl: string;
+  des: string;
+  boldTitle: string;
+  icus: {
+    name: string;
+    features: string[];
+  };
+  equipment: string[];
+  specialFeatures: string[];
+}
+
+export interface SurgicalSpecialties {
+  sectionTitle: string;
+  des : string;
+  videoUrl: string;
+  surgicalHighlights: {
+    title: string;
+    highlights: string[];
+  };
+  hospitalOffers: {
+    title: string;
+    sections: {
+      sectionTitle: string;
+      sectionPoints: string[];
+    }[];
+  };
+}
+
+export interface MedicalSpeciality {
+  sectionTitle: string;
+  sectionImageUrl: string;
+  specialities: string[];
 }

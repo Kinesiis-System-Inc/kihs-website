@@ -38,6 +38,9 @@ import { blogSchema } from './BlogsSchema/blogType'
 import { contentType } from './BlogsSchema/contentType'
 import { MedicalServiceType } from './MedicalServiceSchema/MedicalServiceType'
 import { advancedDiagnostics } from './MedicalServiceSchema/AdvancedDiagnostics'
+import {criticalCare} from "./MedicalServiceSchema/CriticalCare"
+import { surgicalSpecialties } from './MedicalServiceSchema/SurgicalSpeciality'
+import { medicalSceciality } from './MedicalServiceSchema/MedicalSpeciality'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -80,5 +83,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     contentType,
     MedicalServiceType,
     advancedDiagnostics,
+    criticalCare,
+    surgicalSpecialties,
+    medicalSceciality,
   ],
 }
