@@ -5,6 +5,7 @@ import { client, urlFor } from "@/sanity/sanity-utils"
 import { blogQuery } from "@/sanity/lib/queries"
 import { BlogPost } from "@/libs/types"
 
+
 // This would be replaced with a Sanity client fetch in a real implementation
 async function getLatestBlogPosts(): Promise<BlogPost[]> {
   const blogs = await client.fetch(blogQuery);
