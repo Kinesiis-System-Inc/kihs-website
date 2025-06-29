@@ -141,13 +141,14 @@ export const Navigation = () => {
                             transition={{ duration: 0.5 }}
                             className="w-full grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
                         >
-                            {groupedJobs[navSelected].length === 0 ? (
-                                <p className="text-sm text-gray-500 col-span-full">No job openings in this category.</p>
-                            ) : (
+                            {Array.isArray(groupedJobs[navSelected]) && groupedJobs[navSelected].length > 0 ? (
                                 groupedJobs[navSelected].map((item, ind) => (
                                     <NewsEventComp key={ind} {...item} />
                                 ))
+                            ) : (
+                                <p className="text-sm text-gray-500 col-span-full">No job openings in this category.</p>
                             )}
+
                         </motion.div>
                     )}
                 </div>
