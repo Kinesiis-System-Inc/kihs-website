@@ -31,7 +31,8 @@ export const serviceStandardsType = defineType({
               name: 'image',
               title: 'Image',
               type: 'image',
-              options: { hotspot: true }
+              options: { hotspot: true },
+              validation: Rule => Rule.required(),
             })
           ]
         })

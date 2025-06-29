@@ -45,7 +45,8 @@ export const InpatientServices = defineType({
 			type : "array",
 			of : [{
 				type : "image",
-				fields : [{type : "string" , name : "alt" , title : "Alt Name"}]
+				fields : [{type : "string" , name : "alt" , title : "Alt Name"}],
+				validation: Rule => Rule.required(),
 			}]
 		}),
 	]

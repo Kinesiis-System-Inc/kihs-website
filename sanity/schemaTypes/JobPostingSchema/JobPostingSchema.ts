@@ -83,6 +83,7 @@ export const jobPosting = defineType({
       title: 'Image',
       type: 'image',
       options: { hotspot: true },
+      validation: Rule => Rule.required(),
     }),
   ],
 })

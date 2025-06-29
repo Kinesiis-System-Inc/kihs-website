@@ -33,6 +33,7 @@ export const doctorsDepartments = defineType({
               title: 'Department Image',
               type: 'image',
               options: { hotspot: true },
+              validation: Rule => Rule.required(),
             }),
             defineField({
               name: 'services',

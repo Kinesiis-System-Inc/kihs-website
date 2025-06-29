@@ -26,7 +26,7 @@ export const section2Type = defineType({
           type: 'object',
           fields: [
             { name: 'label', title: 'Label', type: 'string' },
-            { name: 'icon', title: 'Icon (image)', type: 'image', options: { hotspot: true } },
+            { name: 'icon', title: 'Icon (image)', type: 'image', options: { hotspot: true },validation: Rule => Rule.required(), },
             { name: 'url', title: 'URL', type: 'string' }
           ]
         })

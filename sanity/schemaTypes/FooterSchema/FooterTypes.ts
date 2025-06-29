@@ -9,7 +9,8 @@ export const footerType = defineType({
       name: 'logo',
       title: 'Footer Logo',
       type: 'image',
-      options: { hotspot: true }
+      options: { hotspot: true },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'companyLinks',

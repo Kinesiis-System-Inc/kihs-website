@@ -11,6 +11,7 @@ export const socialResponsibilityPage = defineType({
       title: 'Hero Image',
       type: 'image',
       options: { hotspot: true },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'heroTitle',
@@ -58,12 +59,14 @@ export const socialResponsibilityPage = defineType({
       title: 'Call to Action Image',
       type: 'image',
       options: { hotspot: true },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'accessImage',
       title: 'Access Section Image',
       type: 'image',
       options: { hotspot: true },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'accessTitle',

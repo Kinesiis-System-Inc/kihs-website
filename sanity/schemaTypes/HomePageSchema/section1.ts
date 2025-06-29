@@ -47,13 +47,15 @@ export const section1Type = defineType({
       name: 'desktopImage',
       title: 'Desktop Background Image',
       type: 'image',
-      options: { hotspot: true }
+      options: { hotspot: true },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'mobileImage',
       title: 'Mobile Background Image',
       type: 'image',
-      options: { hotspot: true }
+      options: { hotspot: true },
+      validation: Rule => Rule.required(),
     })
   ]
 })

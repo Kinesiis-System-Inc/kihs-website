@@ -14,6 +14,7 @@ export const contactUsSection3 = defineType({
         {
           type: 'image',
           options: { hotspot: true },
+          validation: Rule => Rule.required(),
         }
       ]
     })

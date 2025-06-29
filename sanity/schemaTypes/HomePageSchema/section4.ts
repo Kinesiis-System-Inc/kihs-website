@@ -25,6 +25,7 @@ export const aboutKihsType = defineType({
       title: "Image",
       type: "image",
       options: { hotspot: true },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: "imageAlt",

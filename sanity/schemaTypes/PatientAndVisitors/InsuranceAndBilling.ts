@@ -60,7 +60,8 @@ export const insuranceAndBilling = defineType({
 					title : "Alt",
 					type : "string"
 				})
-			]
+			],
+			validation: Rule => Rule.required(),
 		}),
 		defineField({
 			name : "table",
@@ -101,7 +102,8 @@ export const insuranceAndBilling = defineType({
 												name : "companyLogo",
 												title : "Company Logo",
 												type : "image",
-												fields : [{type : "string" , name : "alt" , title : "Alt"}]
+												fields : [{type : "string" , name : "alt" , title : "Alt"}],
+												validation: Rule => Rule.required(),
 											})
 										]
 									}]
@@ -119,7 +121,8 @@ export const insuranceAndBilling = defineType({
 			of : [
 				{
 					type : "image",
-					fields : [{type : "string" , name : "alt" , title : "Alt"}]
+					fields : [{type : "string" , name : "alt" , title : "Alt"}],
+					validation: Rule => Rule.required(),
 				}
 			]
 		})

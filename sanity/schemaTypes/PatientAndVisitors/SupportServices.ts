@@ -45,7 +45,8 @@ export const supportServices  = defineType({
 			name : "coverImage",
 			title : "Cover Image",
 			type : "image",
-			fields : [{type : "string" , name : "alt" , title : "Alt"}]
+			fields : [{type : "string" , name : "alt" , title : "Alt"}],
+			validation: Rule => Rule.required()
 		})
 	]
 })

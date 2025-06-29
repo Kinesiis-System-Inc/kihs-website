@@ -13,7 +13,8 @@ export const medicalSceciality = defineType({
 		defineField({
 			name : "sectionImage",
 			title : "Section Image",
-			type : "image"
+			type : "image",
+			validation: Rule => Rule.required(),
 		}),
 		defineField({
 			name : "specialities",

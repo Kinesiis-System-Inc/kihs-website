@@ -22,7 +22,8 @@ export const leadershipType = defineType({
               name: 'image',
               title: 'Image',
               type: 'image',
-              options: { hotspot: true }
+              options: { hotspot: true },
+              validation: Rule => Rule.required(),
             }),
             defineField({
               name: 'socialLinks',
@@ -64,7 +65,8 @@ export const leadershipType = defineType({
               name: 'image',
               title: 'Image',
               type: 'image',
-              options: { hotspot: true }
+              options: { hotspot: true },
+              validation: Rule => Rule.required(),
             }),
             defineField({
               name: 'socialLinks',
@@ -105,7 +107,8 @@ export const leadershipType = defineType({
               name: 'icon',
               title: 'Icon Image',
               type: 'image',
-              options: { hotspot: true }
+              options: { hotspot: true },
+              validation: Rule => Rule.required(),
             })
           ]
         })

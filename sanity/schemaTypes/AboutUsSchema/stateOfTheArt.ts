@@ -16,7 +16,8 @@ export const stateOfTheArtType = defineType({
           name: 'image',
           title: 'Image',
           type: 'image',
-          options: { hotspot: true }
+          options: { hotspot: true },
+          validation: Rule => Rule.required(),
         }),
         defineField({
           name: 'features',
@@ -49,7 +50,8 @@ export const stateOfTheArtType = defineType({
           name: 'image',
           title: 'Image',
           type: 'image',
-          options: { hotspot: true }
+          options: { hotspot: true },
+          validation: Rule => Rule.required(),
         }),
         defineField({
           name: 'features',

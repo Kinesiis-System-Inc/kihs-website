@@ -29,6 +29,7 @@ export const doctor = defineType({
       title: 'Profile Image',
       type: 'image',
       options: { hotspot: true },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'phone',

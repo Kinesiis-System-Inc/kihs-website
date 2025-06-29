@@ -9,7 +9,8 @@ export const contactUsSection7 = defineType({
       name: 'image',
       title: 'Contact Image',
       type: 'image',
-      options: { hotspot: true }
+      options: { hotspot: true },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'title',

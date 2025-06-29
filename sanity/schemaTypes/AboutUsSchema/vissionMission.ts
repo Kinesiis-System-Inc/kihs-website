@@ -40,7 +40,8 @@ export const visionMissionType = defineType({
       name: 'commitmentImage',
       title: 'Commitment Image',
       type: 'image',
-      options: { hotspot: true }
+      options: { hotspot: true },
+      validation: Rule => Rule.required(),
     })
   ]
 })

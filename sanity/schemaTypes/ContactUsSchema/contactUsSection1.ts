@@ -21,12 +21,14 @@ export const contactUsSection1 = defineType({
       title: 'Desktop Image',
       type: 'image',
       options: { hotspot: true },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'mobileImage',
       title: 'Mobile Image',
       type: 'image',
       options: { hotspot: true },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'contacts',
@@ -38,7 +40,7 @@ export const contactUsSection1 = defineType({
           name: 'contactItem',
           fields: [
             defineField({ name: 'label', title: 'Label', type: 'string' }),
-            defineField({ name: 'icon', title: 'Icon', type: 'image', options: { hotspot: true } }),
+            defineField({ name: 'icon', title: 'Icon', type: 'image', options: { hotspot: true },validation: Rule => Rule.required(), }),
           ]
         }),
       ]
