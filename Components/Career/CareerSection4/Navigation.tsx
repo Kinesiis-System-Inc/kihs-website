@@ -8,12 +8,11 @@ import { client } from "@/sanity/lib/client"
 type NavCategory = "Doctors" | "Nurses" | "Management" | "Development" | "Administration"
 
 interface JobData {
-    title: string
-    jobCatagory: NavCategory
-    catagory: NavCategory // <-- for display
-    isNew: boolean
-    degree: string
-    slug: string
+  title: string
+  jobCategory: NavCategory   // <- correct key
+  isNew: boolean
+  degree: string
+  slug: string
 }
 
 export const Navigation = () => {
@@ -36,27 +35,24 @@ export const Navigation = () => {
     }
 
     const fetchJobs = async () => {
-        const data: Omit<JobData, 'catagory'>[] = await client.fetch(`*[_type == "jobPosting"]{
-            title,
-            jobCatagory,
-            isNew,
-            degree,
-            "slug": slug.current
-        }`)
+        const data: JobData[] = await client.fetch(`
+                  *[_type == "jobPosting"]{
+                    title,
+                    jobCategory,
+                    isNew,
+                    degree,
+                    "slug": slug.current
+                  }
+            `)
 
         const grouped: Record<NavCategory, JobData[]> = {
-            Doctors: [],
-            Nurses: [],
-            Management: [],
-            Development: [],
-            Administration: [],
+            Doctors: [], Nurses: [], Management: [], Development: [], Administration: []
         }
 
         data.forEach(job => {
-            if (job.jobCatagory && grouped[job.jobCatagory]) {
-                grouped[job.jobCatagory].push({ ...job, catagory: job.jobCatagory })
-            }
+            grouped[job.jobCategory].push(job)
         })
+        setGroupedJobs(grouped)
 
         setGroupedJobs(grouped)
     }
@@ -70,11 +66,11 @@ export const Navigation = () => {
         setNavSelected(category)
     }
 
-    const NewsEventComp = ({ title, isNew, degree, slug, catagory }: JobData) => (
+    const NewsEventComp = ({ title, isNew, degree, slug, jobCategory }: JobData) => (
         <div className="w-full py-3 p-2 md:p-3 sm:p-4 grid grid-cols-3 bg-white border-[2px] border-outlineGrey rounded-2xl">
             <div className="flex flex-col col-span-2 gap-2">
                 <div className="flex items-center gap-2">
-                    <span className="text-primary1 text-xs sm:text-sm">{catagory}</span>
+                    <span className="text-primary1 text-xs sm:text-sm">{jobCategory}</span>
                     {isNew ? <span className="px-2 sm:px-4 text-xs sm:text-sm bg-secondaryTint rounded-full">Join immediately</span> : ''}
                 </div>
                 <div>
